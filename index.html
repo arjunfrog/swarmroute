@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4ecda" />
+    <script>
+      // Apply the saved (or system) theme before first paint to avoid a light flash in dark mode.
+      try {
+        var t = localStorage.getItem('swarmroute-theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1a1a'/><path d='M7 22 L13 13 L19 18 L25 9' stroke='%235cc872' stroke-width='3.5' fill='none'/></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>SwarmRoute: delivery routes that work around traffic</title>
+    <meta
+      name="description"
+      content="Plan delivery routes around live traffic. A quantum-inspired swarm search (QPSO) races classic methods on the same streets, with benchmarks and the full math."
+    />
+    <meta property="og:title" content="SwarmRoute" />
+    <meta property="og:description" content="Delivery routes that work around traffic, planned by a quantum-inspired swarm search." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

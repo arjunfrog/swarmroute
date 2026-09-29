@@ -1,0 +1,234 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Tailwind utilities (bg-paper, text-ink, bg-accent …) read these variables,
+ * and the map/charts read the data colours below through src/app/theme.ts, so every colour
+ * switches with [data-theme].
+ */
+@theme {
+  --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+
+  --color-paper: #f4ecda;
+  --color-paper-2: #e8dec6;
+  --color-ink: #16140f;
+  --color-muted: #5e584b;
+  --color-rule: #cdbf9f;
+  --color-accent: #17693b;
+  --color-accent-hover: #1f7f48;
+  --color-on-accent: #f7f7ef;
+  --color-highlight: #f2b705;
+  --color-warn: #b8400c;
+  --color-band: #123824;
+  --color-band-ink: #f4ecda;
+}
+
+:root {
+  color-scheme: light;
+  /* traffic: free → gridlock */
+  --traffic-0: #a8b595;
+  --traffic-1: #cdbf72;
+  --traffic-2: #e2a515;
+  --traffic-3: #e76f12;
+  --traffic-4: #cf2f22;
+  --traffic-5: #8c1712;
+  --incident: #d3322a;
+  /* van routes */
+  --van-0: #17693b;
+  --van-1: #1f4f9e;
+  --van-2: #0b7f89;
+  --van-3: #7a2c10;
+  --van-4: #3a3a3a;
+  --van-5: #b07d09;
+  --van-6: #0369a1;
+  --van-7: #5b6b1a;
+  --van-8: #1e3a8a;
+  --van-9: #8a5a2b;
+  --van-10: #0f766e;
+  --van-11: #155e75;
+  --van-12: #c2590a;
+  --van-13: #4b7d0e;
+  --van-14: #9a3412;
+  --van-15: #2f4858;
+  /* methods */
+  --algo-qpso: #17693b;
+  --algo-pso: #1f4f9e;
+  --algo-ga: #d69a00;
+  --algo-sa: #d9480f;
+  --algo-cw: #0b7f89;
+  --algo-nn: #77776d;
+  --algo-exact: #111111;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-paper: #10130f;
+  --color-paper-2: #1b2019;
+  --color-ink: #d6d2c2;
+  --color-muted: #979a8b;
+  --color-rule: #353c33;
+  --color-accent: #58b86c;
+  --color-accent-hover: #6cc67f;
+  --color-on-accent: #07120a;
+  --color-highlight: #f5c53a;
+  --color-warn: #ff9b5e;
+  --color-band: #0c2014;
+  --color-band-ink: #d6d2c2;
+
+  --traffic-0: #3f4d3d;
+  --traffic-1: #6b6a3c;
+  --traffic-2: #d29b1f;
+  --traffic-3: #e27528;
+  --traffic-4: #e5483a;
+  --traffic-5: #ff3a2b;
+  --incident: #f2503f;
+
+  --van-0: #67c07e;
+  --van-1: #78a3e8;
+  --van-2: #46b3bb;
+  --van-3: #d0946a;
+  --van-4: #a9a491;
+  --van-5: #dcb44f;
+  --van-6: #5ea6da;
+  --van-7: #a6bf66;
+  --van-8: #98acec;
+  --van-9: #c49062;
+  --van-10: #4dbca3;
+  --van-11: #73b3c8;
+  --van-12: #e69b58;
+  --van-13: #8cc56e;
+  --van-14: #cf7a58;
+  --van-15: #8aa0b0;
+
+  --algo-qpso: #67c07e;
+  --algo-pso: #78a3e8;
+  --algo-ga: #dcb44f;
+  --algo-sa: #e69b58;
+  --algo-cw: #46b3bb;
+  --algo-nn: #979a8b;
+  --algo-exact: #d6d2c2;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum' 1;
+}
+
+::selection {
+  background: var(--color-highlight);
+  color: #111111;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Sliders: 2px ink track, square accent thumb. */
+input[type='range'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--color-ink);
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -8px;
+  background: var(--color-accent);
+  border: 2px solid var(--color-ink);
+}
+input[type='range']::-moz-range-track {
+  height: 2px;
+  background: var(--color-ink);
+}
+input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  background: var(--color-accent);
+  border: 2px solid var(--color-ink);
+}
+input[type='range']:hover::-webkit-slider-thumb {
+  background: var(--color-accent-hover);
+}
+input[type='range']:disabled {
+  cursor: not-allowed;
+}
+input[type='range']:disabled::-webkit-slider-thumb {
+  background: var(--color-paper-2);
+}
+input[type='range']:disabled::-moz-range-thumb {
+  background: var(--color-paper-2);
+}
+
+/* Square checkbox. */
+.check {
+  appearance: none;
+  -webkit-appearance: none;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  cursor: pointer;
+}
+.check:hover {
+  background: var(--color-paper-2);
+}
+.check:checked {
+  background: var(--color-accent);
+}
+.check:checked:hover {
+  background: var(--color-accent-hover);
+}
+.check:checked::after {
+  content: '';
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid var(--color-on-accent);
+  border-bottom: 2px solid var(--color-on-accent);
+  transform: translateY(-1px) rotate(-45deg);
+}
+.check:disabled {
+  cursor: not-allowed;
+  border-color: var(--color-muted);
+}
+
+select {
+  border-radius: 0;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
